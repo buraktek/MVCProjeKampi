@@ -1,0 +1,36 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+
+@{
+    Layout = null;
+}
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVCProjeKampi.styles.css" asp-append-version="true" />
+
+
+
+    <br />
+<table class="table table-bordered"> 
+
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Durum</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <th>@item.CategoryID</th>
+            <th>@item.CategoryName</th>
+            <th>@item.CategoryStatus</th>
+        </tr>
+
+    }
+        
+    
+</table>
+
+
+
