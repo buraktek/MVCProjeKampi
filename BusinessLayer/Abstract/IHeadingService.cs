@@ -10,9 +10,9 @@ namespace BusinessLayer.Abstract
     public interface IHeadingService
     {
         List<Heading> GetList();
-        void CategoryAdd(Heading heading);
+        void HeadingAdd(Heading heading);
         Heading GetByID(int id);
-        void CategoryDelete(Heading heading);
-        void CategoryUpdate(Heading heading);
+        void HeadingDelete(Heading heading);
+        void HeadingUpdate(Heading heading);
     }
 }
