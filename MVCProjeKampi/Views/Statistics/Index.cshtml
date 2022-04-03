@@ -1,0 +1,27 @@
+﻿@model MVCProjeKampi.Models.StatisticsModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Kategori Sayısı</h5>
+    <p class="card-text">Toplam Kategori Sayısı: @Model.TotalCategoryCount.ToString()</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Aktif/Pasif Kategori Durumu</h5>
+    <p class="card-text"> Aktif Kategori Sayısı: @Model.CategoryCheckedCount.ToString()</p>
+        <p class="card-text"> Pasif Kategori Sayısı: @{
+                (Model.TotalCategoryCount - Model.CategoryCheckedCount).ToString();
+            }</p>
+  </div>
+</div>
+
+
+
