@@ -29,11 +29,11 @@ namespace MVCProjeKampi.Controllers
             ViewBag.vlc = valuecategory;
 
             List<SelectListItem> valuewriter = (from x in wm.GetList()
-                                                  select new SelectListItem
-                                                  {
-                                                      Text = x.WriterName,
-                                                      Value = x.WriterID.ToString()
-                                                  }).ToList();
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.WriterName,
+                                                    Value = x.WriterID.ToString()
+                                                }).ToList();
             ViewBag.vlw = valuewriter;
 
             return View();
@@ -44,6 +44,20 @@ namespace MVCProjeKampi.Controllers
             p.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             hm.HeadingAdd(p);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult EditHeading(int id)
+        {
+            List<SelectListItem> valuecategory = (from x in cm.GetList()
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = x.CategoryName,
+                                                      Value = x.CategoryID.ToString()
+                                                  }).ToList();
+            ViewBag.vlc = valuecategory;
+
+            var headingvalue = hm.GetByID(id);
+            return View(headingvalue);
         }
     }
 }
