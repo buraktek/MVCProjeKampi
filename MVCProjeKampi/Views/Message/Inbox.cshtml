@@ -1,7 +1,7 @@
 ﻿@using EntityLayer.Concrete
-@model List<Contact>
+@model List<Message>
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Inbox";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -24,7 +24,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-        @Html.Partial("~/Views/Shared/MessageListMenu.cshtml")
+            @Html.Partial("~/Views/Shared/MessageListMenu.cshtml")
             <!-- /.col -->
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
@@ -78,15 +78,15 @@
                                                     <label for="check1"></label>
                                                 </div>
                                             </td>
-                                            <td class="mailbox-star"><a href="/Contact/GetContactDetails/@item.CantactID">@item.UserName<i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/Contact/GetContactDetails/@item.CantactID"> </a></td>
+                                            <td class="mailbox-star"><a href="/Contact/GetContactDetails/@item.MessageID">@item.SenderMail<i class="fas fa-star text-warning"></i></a></td>
+                                            <td class="mailbox-name"><a href="/Contact/GetContactDetails/@item.MessageID"> </a></td>
                                             <td class="mailbox-subject">
                                                 <b>@item.Subject</b> -
                                                 @{
-                                                    if (item.Message.Length > 20)
-                                                        @item.Message.Substring(0, 20)
+                                                    if (item.MessageContent.Length > 20)
+                                                        @item.MessageContent.Substring(0, 20)
                                                     else
-                                                        @item.Message
+                                                        @item.MessageContent
                                                 }
                                             </td>
                                             <td class="mailbox-attachment"></td>
