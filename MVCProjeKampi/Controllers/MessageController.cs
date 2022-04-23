@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAcessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MVCProjeKampi.Controllers
@@ -8,6 +10,7 @@ namespace MVCProjeKampi.Controllers
     public class MessageController : Controller
     {
         MessageManager mm = new MessageManager(new EfMessageDal());
+        MessageValidator messagevalidator = new MessageValidator();
         public IActionResult Inbox()
         {
             var messagelist = mm.GetListInbox();
@@ -29,8 +32,28 @@ namespace MVCProjeKampi.Controllers
         [HttpPost]
         public IActionResult NewMessage(Message p)
         {
-            mm.MessageAdd(p);
-            return View("Index");
+            ValidationResult result = messagevalidator.Validate(p);
+            if (result.IsValid)
+            {
+                p.MessageDate = DateTime.Now;
+                p.SenderMail = "admin@gmail.com";
+                mm.MessageAdd(p);
+                return RedirectToAction("SendBox");
+            }
+            else
+            {
+                foreach(var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
+        }
+
+        public IActionResult GetInBoxMessageDetails(int id)
+        {
+            var contactvalues = mm.GetByID(id);
+            return View(contactvalues);
         }
     }
 }

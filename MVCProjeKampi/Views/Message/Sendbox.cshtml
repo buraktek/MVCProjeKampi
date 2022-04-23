@@ -6,8 +6,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Sendbox</h1>
-
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Mesaj Sayfası</h1>
+                    <h1>Gönderilen Mesajlar Sayfası</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -81,8 +79,8 @@
                                                     <label for="check1"></label>
                                                 </div>
                                             </td>
-                                            <td class="mailbox-star"><a href="/Contact/GetContactDetails/@item.MessageID">@item.ReceiverMail<i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/Contact/GetContactDetails/@item.MessageID"> </a></td>
+                                            <td class="mailbox-star"><a href="/Message/GetInBoxMessageDetails/@item.MessageID">@item.ReceiverMail<i class="fas fa-star text-warning"></i></a></td>
+                                            <td class="mailbox-name"><a href="/Message/GetInBoxMessageDetails/@item.MessageID"> </a></td>
                                             <td class="mailbox-subject">
                                                 <b>@item.Subject</b> -
                                                 @{
@@ -93,7 +91,7 @@
                                                 }
                                             </td>
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">5 mins ago</td>
+                                            <td class="mailbox-date">@item.MessageDate.ToString("dd-MMM-yyyy")</td>
                                         </tr>
                                     }
                                 </tbody>
